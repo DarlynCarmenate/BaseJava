@@ -3,9 +3,6 @@ package com.basejava.webapp;
 import com.basejava.webapp.model.Resume;
 import com.basejava.webapp.storage.ArrayStorage;
 
-/**
- * Test for your com.basejava.webapp.storage.ArrayStorage implementation
- */
 public class MainTestArrayStorage {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
 
