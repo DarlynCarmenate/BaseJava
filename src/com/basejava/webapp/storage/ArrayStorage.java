@@ -1,20 +1,24 @@
+package com.basejava.webapp.storage;
+
+import com.basejava.webapp.model.Resume;
+
 import java.util.Arrays;
 
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
-    int numResumes;
+    private Resume[] storage = new Resume[10000];
+    private int numResumes;
 
-    void clear() {
+    public void clear() {
         Arrays.fill(storage, 0, numResumes, null);
         numResumes = 0;
     }
 
-    void save(Resume resume) {
+    public void save(Resume resume) {
         storage[numResumes] = resume;
         numResumes++;
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
         for (int i = 0; i < numResumes; i++) {
             if (uuid.equals(storage[i].toString()))
                 return storage[i];
@@ -22,7 +26,7 @@ public class ArrayStorage {
         return null;
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         for (int i = 0; i < numResumes; i++) {
             if (uuid.equals(storage[i].toString())) {
                 numResumes--;
@@ -35,11 +39,11 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         return Arrays.copyOf(storage, numResumes);
     }
 
-    int size() {
+    public int size() {
         return numResumes;
     }
 }
