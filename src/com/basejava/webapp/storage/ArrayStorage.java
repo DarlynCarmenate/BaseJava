@@ -5,8 +5,16 @@ import com.basejava.webapp.model.Resume;
 import java.util.Arrays;
 
 public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+    private final Resume[] storage = new Resume[10000];
     private int numResumes;
+
+    public void update(String uuid, String newUuid) {
+        for (int i = 0; i < numResumes; i++) {
+            if (uuid.equals(storage[i].toString())) {
+                storage[i].setUuid(newUuid);
+            }
+        }
+    }
 
     public void clear() {
         Arrays.fill(storage, 0, numResumes, null);
