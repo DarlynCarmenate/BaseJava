@@ -2,16 +2,17 @@ package com.basejava.webapp;
 
 import com.basejava.webapp.model.Resume;
 import com.basejava.webapp.storage.ArrayStorage;
+import com.basejava.webapp.storage.Storage;
 
 public class MainTestArrayStorage {
-    static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    private static final Storage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
-        Resume resume1 = new Resume();
+        final Resume resume1 = new Resume();
         resume1.setUuid("uuid1");
-        Resume resume2 = new Resume();
+        final Resume resume2 = new Resume();
         resume2.setUuid("uuid2");
-        Resume resume3 = new Resume();
+        final Resume resume3 = new Resume();
         resume3.setUuid("uuid3");
 
         ARRAY_STORAGE.save(resume1);
@@ -23,8 +24,7 @@ public class MainTestArrayStorage {
 
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
 
-        String newUuid = "uuid_new";
-        ARRAY_STORAGE.update(resume2, newUuid);
+        ARRAY_STORAGE.update(resume2);
         System.out.println("New uuid of resume2: " + resume2.getUuid());
 
         printAll();
