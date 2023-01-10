@@ -24,6 +24,8 @@ public class MainTestArrayStorage {
 
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
 
+//        System.out.println("Index of r2: " + Arrays.binarySearch(ARRAY_STORAGE.storage, 0,
+//                ARRAY_STORAGE.size(), resume2));
         ARRAY_STORAGE.update(resume2);
         System.out.println("New uuid of resume2: " + resume2.getUuid());
 

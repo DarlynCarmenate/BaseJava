@@ -4,10 +4,7 @@ import com.basejava.webapp.model.Resume;
 
 import java.util.Arrays;
 
-public class ArrayStorage implements Storage {
-    private final static int STORAGE_LIMIT = 10000;
-    private final Resume[] storage = new Resume[STORAGE_LIMIT];
-    private int numResumes;
+public class ArrayStorage extends AbstractArrayStorage {
 
     public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
@@ -20,31 +17,21 @@ public class ArrayStorage implements Storage {
     }
 
     public void clear() {
-        Arrays.fill(storage, 0, numResumes, null);
-        numResumes = 0;
+        Arrays.fill(storage, 0, size, null);
+        size = 0;
         System.out.println("Storage cleared");
     }
 
 
     public void save(Resume resume) {
-        if (numResumes > STORAGE_LIMIT) {
+        if (size > STORAGE_LIMIT) {
             System.out.println("The storage overflow");
         } else if (getIndex(resume.getUuid()) >= 0) {
             System.out.println("The resume already exists");
         } else {
-            storage[numResumes] = resume;
+            storage[size] = resume;
             System.out.println("Resume " + resume + " saved");
-            numResumes++;
-        }
-    }
-
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            System.out.println("There's no " + uuid + " to get");
-            return null;
-        } else {
-            return storage[index];
+            size++;
         }
     }
 
@@ -53,10 +40,10 @@ public class ArrayStorage implements Storage {
         if (index < 0) {
             System.out.println("There's no " + uuid + " for deleting");
         } else {
-            storage[index] = storage[numResumes - 1];
-            storage[numResumes - 1] = null;
+            storage[index] = storage[size - 1];
+            storage[size - 1] = null;
             System.out.println("Resume " + uuid + " deleted");
-            numResumes--;
+            size--;
         }
     }
 
@@ -64,15 +51,11 @@ public class ArrayStorage implements Storage {
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        return Arrays.copyOf(storage, numResumes);
+        return Arrays.copyOf(storage, size);
     }
 
-    public int size() {
-        return numResumes;
-    }
-
-    private int getIndex(String uuid) {
-        for (int i = 0; i < numResumes; i++) {
+    protected int getIndex(String uuid) {
+        for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid()))
                 return i;
         }
