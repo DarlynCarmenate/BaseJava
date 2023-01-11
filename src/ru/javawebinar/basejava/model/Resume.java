@@ -1,4 +1,4 @@
-package com.basejava.webapp.model;
+package ru.javawebinar.basejava.model;
 
 public class Resume implements Comparable<Resume> {
 

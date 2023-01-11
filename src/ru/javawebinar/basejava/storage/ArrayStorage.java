@@ -1,8 +1,6 @@
-package com.basejava.webapp.storage;
+package ru.javawebinar.basejava.storage;
 
-import com.basejava.webapp.model.Resume;
-
-import java.util.Arrays;
+import ru.javawebinar.basejava.model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
 
