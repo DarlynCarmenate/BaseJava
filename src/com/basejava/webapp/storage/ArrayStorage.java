@@ -16,13 +16,6 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
-        System.out.println("Storage cleared");
-    }
-
-
     public void save(Resume resume) {
         if (size > STORAGE_LIMIT) {
             System.out.println("The storage overflow");
@@ -33,25 +26,6 @@ public class ArrayStorage extends AbstractArrayStorage {
             System.out.println("Resume " + resume + " saved");
             size++;
         }
-    }
-
-    public void delete(String uuid){
-        int index = getIndex(uuid);
-        if (index < 0) {
-            System.out.println("There's no " + uuid + " for deleting");
-        } else {
-            storage[index] = storage[size - 1];
-            storage[size - 1] = null;
-            System.out.println("Resume " + uuid + " deleted");
-            size--;
-        }
-    }
-
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
     }
 
     protected int getIndex(String uuid) {

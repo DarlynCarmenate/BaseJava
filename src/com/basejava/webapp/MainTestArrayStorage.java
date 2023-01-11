@@ -2,22 +2,26 @@ package com.basejava.webapp;
 
 import com.basejava.webapp.model.Resume;
 import com.basejava.webapp.storage.ArrayStorage;
+import com.basejava.webapp.storage.SortedArrayStorage;
 import com.basejava.webapp.storage.Storage;
 
 public class MainTestArrayStorage {
-    private static final Storage ARRAY_STORAGE = new ArrayStorage();
+    private static final Storage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
         final Resume resume1 = new Resume();
         resume1.setUuid("uuid1");
         final Resume resume2 = new Resume();
-        resume2.setUuid("uuid2");
+        resume2.setUuid("uuid3");
         final Resume resume3 = new Resume();
-        resume3.setUuid("uuid3");
+        resume3.setUuid("uuid2");
 
         ARRAY_STORAGE.save(resume1);
+        printAll();
         ARRAY_STORAGE.save(resume2);
+        printAll();
         ARRAY_STORAGE.save(resume3);
+        printAll();
 
         System.out.println("Get resume1: " + ARRAY_STORAGE.get(resume1.getUuid()));
         System.out.println("Size: " + ARRAY_STORAGE.size());
