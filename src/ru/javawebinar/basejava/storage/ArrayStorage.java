@@ -3,7 +3,7 @@ package ru.javawebinar.basejava.storage;
 import ru.javawebinar.basejava.model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
-
+    @Override
     public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (index < 0) {
@@ -14,6 +14,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
+    @Override
     public void save(Resume resume) {
         if (size > STORAGE_LIMIT) {
             System.out.println("The storage overflow");
@@ -26,6 +27,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
+    @Override
     protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid()))

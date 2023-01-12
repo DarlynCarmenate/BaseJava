@@ -19,7 +19,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public abstract void save(Resume resume);
 
-    public void delete(String uuid){
+    public final void delete(String uuid){
         int index = getIndex(uuid);
         if (index < 0) {
             System.out.println("There's no " + uuid + " for deleting");
@@ -42,7 +42,7 @@ public abstract class AbstractArrayStorage implements Storage {
         return size;
     }
 
-    public Resume get(String uuid) {
+    public final Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
             System.out.println("There's no " + uuid + " to get");
