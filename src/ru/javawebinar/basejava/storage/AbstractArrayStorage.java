@@ -9,37 +9,33 @@ public abstract class AbstractArrayStorage implements Storage {
     protected final Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size;
 
-    public abstract void update(Resume resume);
-
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
-        System.out.println("Storage cleared");
+    public final void save(Resume resume) {
+        if (size > STORAGE_LIMIT) {
+            System.out.println("The storage overflow");
+        } else if (getIndex(resume.getUuid()) >= 0) {
+            System.out.println("The resume already exists");
+        } else {
+            saveItem(resume);
+        }
     }
 
-    public abstract void save(Resume resume);
+    public final void update(Resume resume) {
+        int index = getIndex(resume.getUuid());
+        if (index < 0) {
+            System.out.println("There's no " + resume.getUuid() + " for updating");
+        } else {
+            System.out.println("Storage " + storage[index].getUuid() + " updated");
+            storage[index] = resume;
+        }
+    }
 
     public final void delete(String uuid){
         int index = getIndex(uuid);
         if (index < 0) {
             System.out.println("There's no " + uuid + " for deleting");
         } else {
-            storage[index] = storage[size - 1];
-            storage[size - 1] = null;
-            System.out.println("Resume " + uuid + " deleted");
-            size--;
+            deleteItem(index);
         }
-    }
-
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
-    }
-
-    public int size() {
-        return size;
     }
 
     public final Resume get(String uuid) {
@@ -52,6 +48,24 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
+    public final void clear() {
+        Arrays.fill(storage, 0, size, null);
+        size = 0;
+        System.out.println("Storage cleared");
+    }
+
+    public final Resume[] getAll() {
+        return Arrays.copyOf(storage, size);
+    }
+
+    public final int size() {
+        return size;
+    }
+
     protected abstract int getIndex(String uuid);
+
+    protected abstract void saveItem(Resume resume);
+
+    protected abstract void deleteItem(int index);
 
 }
