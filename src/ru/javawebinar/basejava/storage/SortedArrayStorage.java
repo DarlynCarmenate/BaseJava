@@ -18,15 +18,10 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         int pos = Math.abs(getIndex(resume.getUuid())) - 1;
         System.arraycopy(storage, pos, storage, pos + 1, size - pos);
         storage[pos] = resume;
-        System.out.println("Resume " + resume + " saved");
-        size++;
     }
 
     @Override
     protected void deleteItem(int index) {
-        size--;
         System.arraycopy(storage, index + 1, storage, index, size - index);
-        storage[size] = null;
-        System.out.println("Resume " + storage[index] + " deleted" );
     }
 }

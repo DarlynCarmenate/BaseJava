@@ -16,15 +16,10 @@ public class ArrayStorage extends AbstractArrayStorage {
     @Override
     protected void saveItem(Resume resume) {
         storage[size] = resume;
-        System.out.println("Resume " + resume + " saved");
-        size++;
     }
 
     @Override
     protected void deleteItem(int index) {
-        storage[index] = storage[size - 1];
-        storage[size - 1] = null;
-        System.out.println("Resume " + storage[index].getUuid() + " deleted");
-        size--;
+        storage[index] = storage[size];
     }
 }
