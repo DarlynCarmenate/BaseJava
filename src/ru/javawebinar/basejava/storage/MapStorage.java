@@ -11,7 +11,7 @@ public class MapStorage extends AbstractStorage<String> {
 
     @Override
     protected void doUpdate(Resume resume, String searchKey) {
-        mapStorage.put(searchKey, resume);
+        mapStorage.replace(searchKey, resume);
     }
 
     @Override
@@ -57,6 +57,6 @@ public class MapStorage extends AbstractStorage<String> {
                 return key;
             }
         }
-        return null;
+        return uuid;
     }
 }
