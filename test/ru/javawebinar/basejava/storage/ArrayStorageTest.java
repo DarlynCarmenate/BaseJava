@@ -1,12 +1,10 @@
 package ru.javawebinar.basejava.storage;
 
-class ArrayStorageTest extends AbstractArrayStorageTest{
+class ArrayStorageTest extends AbstractStorageTest {
 
-    Storage storage = new ArrayStorage();
-
-    public ArrayStorageTest() {
-        this.storage.save(RESUME_1);
-        this.storage.save(RESUME_2);
-        this.storage.save(RESUME_3);
+    protected ArrayStorageTest() {
+        super(new ArrayStorage());
     }
+
 }
+
