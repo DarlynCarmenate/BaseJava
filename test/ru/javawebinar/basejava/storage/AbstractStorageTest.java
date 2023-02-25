@@ -1,6 +1,7 @@
 package ru.javawebinar.basejava.storage;
 
 import org.junit.jupiter.api.*;
+import org.junit.runners.Suite;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.exception.StorageException;

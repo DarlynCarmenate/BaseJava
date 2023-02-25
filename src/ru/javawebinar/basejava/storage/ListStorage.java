@@ -7,40 +7,41 @@ import java.util.List;
 
 public class ListStorage extends AbstractStorage<Integer> {
 
-    private final List<Resume> listStorage = new ArrayList<>();
+    private final List<Resume> storage = new ArrayList<>();
+
     @Override
     protected void doUpdate(Resume resume, Integer searchKey) {
-        listStorage.set(searchKey, resume);
+        storage.set(searchKey, resume);
     }
 
     @Override
     protected void doClear() {
-        listStorage.clear();
+        storage.clear();
     }
 
     @Override
     protected void doSave(Resume resume, Integer searchKey) {
-        listStorage.add(resume);
+        storage.add(resume);
     }
 
     @Override
     protected Resume doGet(Integer searchKey) {
-        return listStorage.get(searchKey);
+        return storage.get(searchKey);
     }
 
     @Override
     protected void doDelete(Integer searchKey) {
-        listStorage.remove((int) searchKey);
+        storage.remove((int) searchKey);
     }
 
     @Override
     protected Resume[] doGetAll() {
-        return listStorage.toArray(new Resume[0]);
+        return storage.toArray(new Resume[0]);
     }
 
     @Override
     protected Integer doSize() {
-        return listStorage.size();
+        return storage.size();
     }
 
     @Override
@@ -50,8 +51,8 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected Integer getSearchKey(String uuid) {
-        for (int i = 0; i < listStorage.size(); i++) {
-            if(uuid.equals(listStorage.get(i).getUuid())) {
+        for (int i = 0; i < storage.size(); i++) {
+            if(uuid.equals(storage.get(i).getUuid())) {
                 return i;
             }
         }
