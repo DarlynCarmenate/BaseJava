@@ -4,12 +4,12 @@ import ru.javawebinar.basejava.model.Resume;
 import ru.javawebinar.basejava.storage.*;
 
 public class MainTestArrayStorage {
-    private static final Storage ARRAY_STORAGE = new ListStorage();
+    private static final Storage ARRAY_STORAGE = new MapStorage_2();
 
     public static void main(String[] args) {
-        final Resume resume1 = new Resume("uuid1");
-        final Resume resume2 = new Resume("uuid2");
-        final Resume resume3 = new Resume("uuid3");
+        final Resume resume1 = new Resume("uuid1", "Anton Filimonov");
+        final Resume resume2 = new Resume("uuid2", "Maria Petrova");
+        final Resume resume3 = new Resume("uuid3", "Hector Jose Carmenate");
 
         ARRAY_STORAGE.save(resume1);
         printAll();
@@ -39,7 +39,7 @@ public class MainTestArrayStorage {
 
     static void printAll() {
         System.out.println("\nGet All");
-        for (Resume r : ARRAY_STORAGE.getAll()) {
+        for (Resume r : ARRAY_STORAGE.getAllSorted()) {
             System.out.println(r);
         }
     }

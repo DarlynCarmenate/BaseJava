@@ -1,6 +1,6 @@
 package ru.javawebinar.basejava.storage;
 
-class SortedStorageTest extends AbstractStorageTest {
+class SortedStorageTest extends AbstractArrayStorageTest {
 
     protected SortedStorageTest() {
         super(new SortedArrayStorage());

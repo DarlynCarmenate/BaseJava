@@ -4,13 +4,17 @@ import ru.javawebinar.basejava.model.Resume;
 
 import java.util.*;
 
-public class MapStorage extends AbstractStorage<String> {
+public class MapStorage_2 extends AbstractStorage<String> {
 
     private final Map<String, Resume> storage = new HashMap<>();
 
     @Override
     protected void doUpdate(Resume resume, String searchKey) {
-        storage.replace(searchKey, resume);
+        for(Map.Entry<String, Resume> entry: storage.entrySet()) {
+            if (entry.getValue().getFullName().equals(searchKey)) {
+                storage.replace(entry.getValue().getUuid(), resume);
+            }
+        }
     }
 
     @Override
@@ -20,18 +24,27 @@ public class MapStorage extends AbstractStorage<String> {
 
     @Override
     protected void doSave(Resume resume, String searchKey) {
-        storage.put(searchKey, resume);
+        storage.put(resume.getUuid(), resume);
     }
 
     @Override
     protected Resume doGet(String searchKey) {
-        return storage.get(searchKey);
+        for(Map.Entry<String, Resume> entry: storage.entrySet()) {
+            if (entry.getValue().getFullName().equals(searchKey)) {
+                return entry.getValue();
+            }
+        }
+        return null;
     }
 
     @Override
     protected void doDelete(String searchKey) {
-        storage.remove(searchKey);
-    }
+        for(Map.Entry<String, Resume> entry: storage.entrySet()) {
+            if (entry.getValue().getFullName().equals(searchKey)) {
+                storage.remove(entry);
+                }
+            }
+        }
 
     @Override
     protected List<Resume> doGetAllSorted() {
@@ -54,7 +67,7 @@ public class MapStorage extends AbstractStorage<String> {
     }
 
     @Override
-    protected String getSearchKey(String uuid) {
-        return uuid;
+    protected String getSearchKey(String fullName) {
+        return fullName;
     }
 }

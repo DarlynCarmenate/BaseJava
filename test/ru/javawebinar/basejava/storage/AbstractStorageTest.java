@@ -7,10 +7,13 @@ import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractStorageTest {
-    private final Storage storage;
+    protected final Storage storage;
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
@@ -47,21 +50,6 @@ public abstract class AbstractStorageTest {
         assertGet(RESUME_4);
         assertSize(4);
     }
-
-    @Test
-    void storageOverflow() throws Exception {
-        storage.clear();
-        try {
-            for (int i = 0; i < AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                Resume r = new Resume();
-                storage.save(r);
-            }
-        } catch(StorageException e) {
-            fail("Something goes wrong", e.getCause());
-        }
-        Assertions.assertThrows(StorageException.class, () -> storage.save(RESUME_4));
-    }
-
 
     @Test
     void saveAlreadyExist() throws Exception {
@@ -112,14 +100,14 @@ public abstract class AbstractStorageTest {
     void clear() throws Exception {
         storage.clear();
         assertSize(0);
-        assertArrayEquals(new Resume[0], storage.getAll());
+        assertArrayEquals(new Resume[0], storage.getAllSorted());
     }
 
     @Test
-    void getAll() throws Exception {
-        Resume[] testStorage = new Resume[]{RESUME_1, RESUME_2, RESUME_3};;
+    void getAllSorted() throws Exception {
+        List<Resume> testStorage = new ArrayList<Resume>(RESUME_1, RESUME_2, RESUME_3);
         assertSize(3);
-        assertArrayEquals(testStorage, storage.getAll());
+        assertArrayEquals(testStorage, storage.getAllSorted());
     }
 
     @Test
