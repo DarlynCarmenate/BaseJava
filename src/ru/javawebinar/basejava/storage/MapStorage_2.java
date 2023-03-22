@@ -4,14 +4,14 @@ import ru.javawebinar.basejava.model.Resume;
 
 import java.util.*;
 
-public class MapStorage_2 extends AbstractStorage<String> {
+public class MapStorage_2 extends AbstractStorage<Resume> {
 
     private final Map<String, Resume> storage = new HashMap<>();
 
     @Override
-    protected void doUpdate(Resume resume, String searchKey) {
+    protected void doUpdate(Resume resume, Resume searchKey) {
         for(Map.Entry<String, Resume> entry: storage.entrySet()) {
-            if (entry.getValue().getFullName().equals(searchKey)) {
+            if (entry.getValue().equals(searchKey)) {
                 storage.replace(entry.getValue().getUuid(), resume);
             }
         }
@@ -23,14 +23,14 @@ public class MapStorage_2 extends AbstractStorage<String> {
     }
 
     @Override
-    protected void doSave(Resume resume, String searchKey) {
+    protected void doSave(Resume resume, Resume searchKey) {
         storage.put(resume.getUuid(), resume);
     }
 
     @Override
-    protected Resume doGet(String searchKey) {
+    protected Resume doGet(Resume searchKey) {
         for(Map.Entry<String, Resume> entry: storage.entrySet()) {
-            if (entry.getValue().getFullName().equals(searchKey)) {
+            if (entry.getValue().equals(searchKey)) {
                 return entry.getValue();
             }
         }
@@ -38,9 +38,9 @@ public class MapStorage_2 extends AbstractStorage<String> {
     }
 
     @Override
-    protected void doDelete(String searchKey) {
+    protected void doDelete(Resume searchKey) {
         for(Map.Entry<String, Resume> entry: storage.entrySet()) {
-            if (entry.getValue().getFullName().equals(searchKey)) {
+            if (entry.getValue().equals(searchKey)) {
                 storage.remove(entry);
                 }
             }
@@ -52,7 +52,7 @@ public class MapStorage_2 extends AbstractStorage<String> {
         storage.entrySet().stream().forEach(entry -> {
             list.add(entry.getValue());
         });
-        list.sort(Comparator.comparing((Resume b) -> b.getFullName()).thenComparing((Resume b) -> b.getUuid()));
+        list.sort(Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid));
         return list;
     }
 
@@ -62,12 +62,12 @@ public class MapStorage_2 extends AbstractStorage<String> {
     }
 
     @Override
-    protected boolean isExist(String searchKey) {
-        return storage.containsKey(searchKey);
+    protected boolean isExist(Resume searchKey) {
+        return storage.containsValue(searchKey);
     }
 
     @Override
-    protected String getSearchKey(String fullName) {
-        return fullName;
+    protected Resume getSearchKey(String uuid) {
+        return storage.get(uuid);
     }
 }
