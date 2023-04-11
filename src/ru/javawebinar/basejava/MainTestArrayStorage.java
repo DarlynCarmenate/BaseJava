@@ -4,7 +4,7 @@ import ru.javawebinar.basejava.model.Resume;
 import ru.javawebinar.basejava.storage.*;
 
 public class MainTestArrayStorage {
-    private static final Storage ARRAY_STORAGE = new MapStorage_2();
+    private static final Storage ARRAY_STORAGE = new MapResumeStorage();
 
     public static void main(String[] args) {
         final Resume resume1 = new Resume("uuid1", "Anton Filimonov");

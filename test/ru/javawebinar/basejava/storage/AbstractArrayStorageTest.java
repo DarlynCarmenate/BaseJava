@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class AbstractArrayStorageTest extends AbstractStorageTest{
 
     protected AbstractArrayStorageTest(Storage storage) {
-
         super(storage);
     }
 
@@ -19,13 +18,13 @@ public class AbstractArrayStorageTest extends AbstractStorageTest{
         storage.clear();
         try {
             for (int i = 0; i < AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                Resume r = new Resume();
+                Resume r = new Resume("Name" + i);
                 storage.save(r);
             }
         } catch(StorageException e) {
             fail("Something goes wrong", e.getCause());
         }
-        Assertions.assertThrows(StorageException.class, () -> storage.save(new Resume()));
+        Assertions.assertThrows(StorageException.class, () -> storage.save(new Resume("Overflow")));
     }
 
 }

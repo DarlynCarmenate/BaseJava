@@ -2,7 +2,7 @@ package ru.javawebinar.basejava.storage;
 
 class ListStorageTest extends AbstractStorageTest {
 
-    protected ListStorageTest() {
+    public ListStorageTest() {
         super(new ListStorage());
     }
 }

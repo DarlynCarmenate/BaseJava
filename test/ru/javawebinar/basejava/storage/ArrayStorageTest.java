@@ -2,7 +2,7 @@ package ru.javawebinar.basejava.storage;
 
 class ArrayStorageTest extends AbstractArrayStorageTest {
 
-    protected ArrayStorageTest() {
+    public ArrayStorageTest() {
         super(new ArrayStorage());
     }
 
