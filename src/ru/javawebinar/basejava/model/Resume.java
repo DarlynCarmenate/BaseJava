@@ -4,35 +4,35 @@ import java.util.*;
 
 public class Resume implements Comparable<Resume> {
 
-    private final String uuid;
+    private final java.lang.String uuid;
 
-    private final String fullName;
+    private final java.lang.String fullName;
 
-    private final Map<ContactsType, Contacts> contacts = new EnumMap<>(ContactsType.class);
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
 
-    private final Map<SectionType, Solution> sections = new EnumMap<>(SectionType.class);
+    private final Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
 
     public Resume() {
         this("");
     }
 
-    public Resume(String fullName) {
+    public Resume(java.lang.String fullName) {
         this.uuid = UUID.randomUUID().toString();
         this.fullName = fullName;
     }
 
-    public Resume(String uuid, String fullName) {
+    public Resume(java.lang.String uuid, java.lang.String fullName) {
         Objects.requireNonNull(uuid, "uuid must not be null");
         Objects.requireNonNull(fullName, "fullname must not be null");
         this.uuid = uuid;
         this.fullName = fullName;
     }
 
-    public Map<ContactsType, Contacts> getContacts() {
+    public Map<ContactType, String> getContacts() {
         return contacts;
     }
 
-    public Map<SectionType, Solution> getSections() {
+    public Map<SectionType, AbstractSection> getSections() {
         return sections;
     }
 
@@ -54,16 +54,16 @@ public class Resume implements Comparable<Resume> {
         return result;
     }
 
-    public String getUuid() {
+    public java.lang.String getUuid() {
         return uuid;
     }
 
-    public String getFullName() {
+    public java.lang.String getFullName() {
         return fullName;
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return uuid + '(' + fullName + ')';
     }
 
