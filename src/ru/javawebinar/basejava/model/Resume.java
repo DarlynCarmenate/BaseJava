@@ -1,8 +1,10 @@
 package ru.javawebinar.basejava.model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Resume implements Comparable<Resume> {
+public class Resume implements Comparable<Resume>, Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final java.lang.String uuid;
 
@@ -28,12 +30,12 @@ public class Resume implements Comparable<Resume> {
         this.fullName = fullName;
     }
 
-    public Map<ContactType, String> getContacts() {
-        return contacts;
+    public String getContacts(ContactType type) {
+        return contacts.get(type);
     }
 
-    public Map<SectionType, Section> getSections() {
-        return sections;
+    public Section getSections(SectionType type) {
+        return sections.get(type);
     }
 
     public void addContact(ContactType type, String value) {

@@ -42,7 +42,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    public void doClear() {
+    public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
         System.out.println("Storage cleared");
@@ -54,7 +54,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    public Integer doSize() {
+    public int size() {
         return size;
     }
 

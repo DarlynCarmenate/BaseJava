@@ -14,7 +14,7 @@ public class ListStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected void doClear() {
+    public void clear() {
         storage.clear();
     }
 
@@ -34,12 +34,12 @@ public class ListStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected List<Resume> doCopyAll() {
+    public List<Resume> doCopyAll() {
         return new ArrayList<>(storage);
     }
 
     @Override
-    protected Integer doSize() {
+    public int size() {
         return storage.size();
     }
 

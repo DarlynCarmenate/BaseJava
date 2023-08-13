@@ -1,5 +1,6 @@
 package ru.javawebinar.basejava.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -11,14 +12,15 @@ import static ru.javawebinar.basejava.util.DateUtil.NOW;
 import static ru.javawebinar.basejava.util.DateUtil.of;
 
 
-public class Company {
+public class Organization implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final Link homePage;
     private List<Position> positions = new ArrayList<>();
 
-    public Company(String name, String url, Position... positions) {
+    public Organization(String name, String url, Position... positions) {
         this(new Link(name, url), Arrays.asList(positions));
     }
-    public Company(Link homePage, List<Position> positions) {
+    public Organization(Link homePage, List<Position> positions) {
         this.positions = positions;
         this.homePage = homePage;
     }
@@ -28,10 +30,10 @@ public class Company {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Company company = (Company) o;
+        Organization organization = (Organization) o;
 
-        if (!Objects.equals(homePage, company.homePage)) return false;
-        return Objects.equals(positions, company.positions);
+        if (!Objects.equals(homePage, organization.homePage)) return false;
+        return Objects.equals(positions, organization.positions);
     }
 
     @Override
@@ -46,7 +48,7 @@ public class Company {
         return "Company(" + homePage + positions + ')';
     }
 
-    public static class Position {
+    public static class Position implements Serializable{
         private final LocalDate startDate;
         private final LocalDate endDate;
         private final String title;

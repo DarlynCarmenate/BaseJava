@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Test;
 import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
 
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class AbstractArrayStorageTest extends AbstractStorageTest{
-
     protected AbstractArrayStorageTest(Storage storage) {
         super(storage);
     }

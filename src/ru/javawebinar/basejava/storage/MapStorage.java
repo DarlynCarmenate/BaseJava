@@ -14,11 +14,6 @@ public class MapStorage extends AbstractStorage<String> {
     }
 
     @Override
-    protected void doClear() {
-        storage.clear();
-    }
-
-    @Override
     protected void doSave(Resume resume, String searchKey) {
         storage.put(searchKey, resume);
     }
@@ -34,16 +29,6 @@ public class MapStorage extends AbstractStorage<String> {
     }
 
     @Override
-    protected List<Resume> doCopyAll() {
-        return new ArrayList<>(storage.values());
-    }
-
-    @Override
-    protected Integer doSize() {
-        return storage.size();
-    }
-
-    @Override
     protected boolean isExist(String searchKey) {
         return storage.containsKey(searchKey);
     }
@@ -51,5 +36,20 @@ public class MapStorage extends AbstractStorage<String> {
     @Override
     protected String getSearchKey(String uuid) {
         return uuid;
+    }
+
+    @Override
+    public void clear() {
+        storage.clear();
+    }
+
+    @Override
+    public List<Resume> doCopyAll() {
+        return new ArrayList<>(storage.values());
+    }
+
+    @Override
+    public int size() {
+        return storage.size();
     }
 }
